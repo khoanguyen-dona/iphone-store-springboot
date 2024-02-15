@@ -37,6 +37,10 @@ public class Rating {
 
     private LocalDateTime createdAt;
 
+    
+    public Rating() {
+    }
+
     public Rating(Long id, User user, Product product, double rating, LocalDateTime createdAt) {
         this.id = id;
         this.user = user;

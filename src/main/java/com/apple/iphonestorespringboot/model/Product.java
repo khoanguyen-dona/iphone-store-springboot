@@ -19,15 +19,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 
-
-
-
-
-
-
-
-
-
 @Entity
 public class Product {
 
@@ -35,13 +26,8 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    
-    private String title;
-
-    
+    private String title;   
     private String description;
-
-   
     private int price;
     
     @Column(name="discounted_price")
