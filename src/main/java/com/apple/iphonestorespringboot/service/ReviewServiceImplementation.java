@@ -3,6 +3,7 @@ package com.apple.iphonestorespringboot.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apple.iphonestorespringboot.exception.ProductException;
@@ -16,9 +17,15 @@ import com.apple.iphonestorespringboot.request.ReviewRequest;
 
 @Service
 public class ReviewServiceImplementation implements ReviewService{
+    
 
+    @Autowired
     private ReviewRepository reviewRepository;
+
+    @Autowired
     private ProductService productService;
+
+    @Autowired
     private ProductRepository productRepository;
 
     

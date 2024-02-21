@@ -48,7 +48,7 @@ public class Product {
     @Embedded
     @ElementCollection
     @Column(name="sizes")
-    private Set<Size> sizes=new HashSet<>();
+    private Set<Size> sizes=new HashSet<Size>();
 
     @Column(name="image_url")
     private String imageUrl;
@@ -169,8 +169,8 @@ public class Product {
         return sizes;
     }
 
-    public void setSizes(Set<Size> sizes) {
-        this.sizes = sizes;
+    public void setSizes(Set<Size> list) {
+        this.sizes = list;
     }
 
     public String getImageUrl() {

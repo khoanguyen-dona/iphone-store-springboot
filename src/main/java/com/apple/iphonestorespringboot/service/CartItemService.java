@@ -5,9 +5,10 @@ import com.apple.iphonestorespringboot.exception.UserException;
 import com.apple.iphonestorespringboot.model.Cart;
 import com.apple.iphonestorespringboot.model.CartItem;
 import com.apple.iphonestorespringboot.model.Product;
+import com.apple.iphonestorespringboot.request.AddItemRequest;
 
 public interface CartItemService {
-    public CartItem createCartItem(CartItem cartItem);
+    public CartItem createCartItem(CartItem cartItem,AddItemRequest req);
     public CartItem updateCartItem(Long userId,long id,CartItem cartItem)throws CartItemException,UserException;
     public CartItem isCartItemExist(Cart cart,Product product,String size,Long userId);
     public void removeCartItem(Long userId,Long cartItemId) throws CartItemException,UserException;

@@ -3,8 +3,10 @@ package com.apple.iphonestorespringboot.service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.apple.iphonestorespringboot.exception.ProductException;
 import com.apple.iphonestorespringboot.model.Category;
 import com.apple.iphonestorespringboot.model.Product;
+import com.apple.iphonestorespringboot.model.Size;
 import com.apple.iphonestorespringboot.repository.CategoryRepository;
 import com.apple.iphonestorespringboot.repository.ProductRepository;
 import com.apple.iphonestorespringboot.request.CreateProductRequest;
@@ -22,8 +25,13 @@ import com.apple.iphonestorespringboot.request.CreateProductRequest;
 @Service
 public class ProductServiceImplementation implements ProductService{
 
+    @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
     private UserService userService;
+
+    @Autowired
     private CategoryRepository categoryRepository;
 
 
@@ -120,12 +128,12 @@ public class ProductServiceImplementation implements ProductService{
     }
 
     @Override
-    public Page<Product> getAllProduct(String category, List<String> colors, List<String> sizes, Integer minPrice,
+    public Page<Product> getAllProduct(String category, List<String> color, List<String> sizes, Integer minPrice,
             Integer maxPrice, Integer minDiscount, String sort, String stock, Integer pageNumber, Integer pageSize) {
         Pageable pageable=PageRequest.of(pageNumber,pageSize);
         List<Product> products=productRepository.filterProducts(category,minPrice,maxPrice,minDiscount,sort);
-        if(!colors.isEmpty()){
-            products=products.stream().filter(p->colors.stream().anyMatch(c->c.equalsIgnoreCase(p.getColor())))
+        if(!color.isEmpty()){
+            products=products.stream().filter(p->color.stream().anyMatch(c->c.equalsIgnoreCase(p.getColor())))
             .collect(Collectors.toList());
         }
         if(stock!=null){

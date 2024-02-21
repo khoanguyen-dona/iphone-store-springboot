@@ -1,6 +1,8 @@
 package com.apple.iphonestorespringboot.request;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.apple.iphonestorespringboot.model.Size;
@@ -15,8 +17,9 @@ public class CreateProductRequest {
     private int quantity;
     private String brand;
     private String color;
-    private Set<Size> size=new HashSet<>();
+    private Set<Size> sizes=new HashSet<>();
     private String imageUrl;
+    // men/clothing/mens_shirt
     private String topLevelCategory;
     private String secondLevelCategory;
     private String thirdLevelCategory;
@@ -70,10 +73,10 @@ public class CreateProductRequest {
         this.color = color;
     }
     public Set<Size> getSize() {
-        return size;
+        return sizes;
     }
-    public void setSize(Set<Size> size) {
-        this.size = size;
+    public void setSize(Set<Size> sizes) {
+        this.sizes = sizes;
     }
     public String getImageUrl() {
         return imageUrl;

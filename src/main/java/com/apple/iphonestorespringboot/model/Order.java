@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
+
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,15 +14,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="orders")
 public class Order {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    @Column(name="order_id")
-    private String orderId;
 
     @ManyToOne
     private User user;
@@ -42,8 +42,8 @@ public class Order {
 
     private double totalPrice;
 
-    private Integer totalDiscountedPrice;
-    private Integer discount;
+    private double totalDiscountedPrice;
+    private double discount;
     private String orderStatus;
     private int totalItem;
     private LocalDateTime createdAt;
@@ -51,12 +51,12 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long id, String orderId, User user, List<OrderItem> orderItems, LocalDateTime orderDate,
+    public Order(Long id, User user, List<OrderItem> orderItems, LocalDateTime orderDate,
             LocalDateTime deliveryDate, Address shippingAddress, PaymentDetails paymentDetails, double totalPrice,
-            Integer totalDiscountedPrice, Integer discount, String orderStatus, int totalItem,
+            double totalDiscountedPrice, double discount, String orderStatus, int totalItem,
             LocalDateTime createdAt) {
         this.id = id;
-        this.orderId = orderId;
+        
         this.user = user;
         this.orderItems = orderItems;
         this.orderDate = orderDate;
@@ -79,12 +79,7 @@ public class Order {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getOrderId() {
-        return orderId;
-    }
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
+   
     public User getUser() {
         return user;
     }
@@ -127,16 +122,16 @@ public class Order {
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
-    public Integer getTotalDiscountedPrice() {
+    public double getTotalDiscountedPrice() {
         return totalDiscountedPrice;
     }
-    public void setTotalDiscountedPrice(Integer totalDiscountedPrice) {
+    public void setTotalDiscountedPrice(double totalDiscountedPrice) {
         this.totalDiscountedPrice = totalDiscountedPrice;
     }
-    public Integer getDiscount() {
+    public double getDiscount() {
         return discount;
     }
-    public void setDiscount(Integer discount) {
+    public void setDiscount(double discount) {
         this.discount = discount;
     }
     public String getOrderStatus() {

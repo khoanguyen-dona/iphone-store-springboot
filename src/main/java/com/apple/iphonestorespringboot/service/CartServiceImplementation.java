@@ -1,5 +1,6 @@
 package com.apple.iphonestorespringboot.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apple.iphonestorespringboot.exception.ProductException;
@@ -7,26 +8,36 @@ import com.apple.iphonestorespringboot.model.Cart;
 import com.apple.iphonestorespringboot.model.CartItem;
 import com.apple.iphonestorespringboot.model.Product;
 import com.apple.iphonestorespringboot.model.User;
+import com.apple.iphonestorespringboot.repository.CartItemRepository;
 import com.apple.iphonestorespringboot.repository.CartRepository;
 import com.apple.iphonestorespringboot.request.AddItemRequest;
 
 @Service
 public class CartServiceImplementation implements CartService{
 
+    @Autowired
     private CartRepository cartRepository;
+
+   
+    
+    @Autowired
     private CartItemService cartItemService;
+
+    @Autowired
     private ProductService productService;
 
     public CartServiceImplementation(CartRepository cartRepository, CartItemService cartItemService,ProductService productService) {
         this.cartRepository = cartRepository;
         this.cartItemService = cartItemService;
         this.productService = productService;
+        
     }
 
     @Override
     public Cart createCart(User user){
         Cart cart=new Cart();
         cart.setUser(user);
+        
         return cartRepository.save(cart);
     }
 
@@ -43,12 +54,22 @@ public class CartServiceImplementation implements CartService{
             cartItem.setQuantity(req.getQuantity());
             cartItem.setUserId(userId);
 
-            int price=req.getQuantity()*product.getDiscountedPrice();
-            cartItem.setPrice(price);
+            // int price=req.getQuantity()*product.getDiscountedPrice();
+            // cartItem.setPrice(price);
             cartItem.setSize(req.getSize());
 
-            CartItem createdCartItem=cartItemService.createCartItem(cartItem);
+            CartItem createdCartItem=cartItemService.createCartItem(cartItem,req);
             cart.getCartItems().add(createdCartItem);
+            int totalItem=cart.getTotalItem()+req.getQuantity();
+            double totalPrice=cart.getTotalPrice()+(req.getPrice()*req.getQuantity());
+            double totalDiscountedPrice=cart.getTotalDiscountedPrice()+(req.getDiscountedPrice()*req.getQuantity());
+            
+            cart.setTotalDiscountedPrice(totalDiscountedPrice);
+            cart.setTotalPrice(totalPrice);
+            cart.setTotalItem(totalItem);
+
+            
+            cartRepository.save(cart);
         }
         return "Item added to cart";
     }
@@ -57,8 +78,8 @@ public class CartServiceImplementation implements CartService{
     public Cart findUserCart(Long userId){
         Cart cart=cartRepository.findByUserId(userId);
 
-        int totalPrice=0;
-        int totalDiscountedPrice=0;
+        double totalPrice=0;
+        double totalDiscountedPrice=0;
         int totalItem=0;
 
         for(CartItem cartItem :cart.getCartItems()){

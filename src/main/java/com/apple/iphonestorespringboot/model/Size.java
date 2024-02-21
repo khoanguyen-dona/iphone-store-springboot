@@ -1,14 +1,20 @@
 package com.apple.iphonestorespringboot.model;
 
-public class Size {
+import jakarta.persistence.Entity;
 
+public class Size {
+    
     private String name;
     private int quantity;
-
 
    public Size () {
     
    }
+   
+    public Size(String name, int quantity) {
+        this.name = name;
+        this.quantity = quantity;
+    }
 
     public String getName() {
         return name;

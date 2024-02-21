@@ -25,8 +25,8 @@ public class OrderItem {
     
     private String size;
     private int quantity;
-    private Integer price;
-    private Integer discountedPrice;
+    private double price;
+    private double discountedPrice;
     private Long userId;
     private LocalDateTime deliveryDate;
 
@@ -34,8 +34,8 @@ public class OrderItem {
         
     }
 
-    public OrderItem(Long id, Order order, Product product, String size, int quantity, Integer price,
-            Integer discountedPrice, Long userId, LocalDateTime deliveryDate) {
+    public OrderItem(Long id, Order order, Product product, String size, int quantity, double price,
+            double discountedPrice, Long userId, LocalDateTime deliveryDate) {
         this.id = id;
         this.order = order;
         this.product = product;
@@ -87,19 +87,19 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    public Integer getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public Integer getDiscountedPrice() {
+    public double getDiscountedPrice() {
         return discountedPrice;
     }
 
-    public void setDiscountedPrice(Integer discountedPrice) {
+    public void setDiscountedPrice(double discountedPrice) {
         this.discountedPrice = discountedPrice;
     }
 

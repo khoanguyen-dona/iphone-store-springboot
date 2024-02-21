@@ -2,6 +2,7 @@ package com.apple.iphonestorespringboot.service;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apple.iphonestorespringboot.config.JwtProvider;
@@ -13,7 +14,10 @@ import com.apple.iphonestorespringboot.repository.UserRepository;
 @Service
 public class UserServiceImplementation implements UserService {
 
+    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
     private JwtProvider jwtProvider;
 
     

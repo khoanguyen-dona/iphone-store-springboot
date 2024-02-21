@@ -14,9 +14,9 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtProvider {
     SecretKey key=Keys.hmacShaKeyFor(JwtConstant.SECRET_KEY.getBytes());
-    
+    // hạn token 1000 ngay
     public String generateToken(Authentication auth){
-        String jwt=Jwts.builder().setIssuedAt(new Date()).setExpiration(new Date(new Date().getTime()+86400))
+        String jwt=Jwts.builder().setIssuedAt(new Date()).setExpiration(new Date(new Date().getTime()+86400000))
         .claim("email", auth.getName()).signWith(key).compact();
 
         return jwt;

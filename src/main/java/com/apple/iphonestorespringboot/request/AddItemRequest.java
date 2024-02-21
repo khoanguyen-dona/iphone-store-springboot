@@ -4,10 +4,21 @@ public class AddItemRequest {
     private Long productId;
     private String size;
     private int quantity;
-    private Integer price;
+    private double price;
+    private double discountedPrice;
     
     public AddItemRequest() {
     }
+
+    
+    public double getDiscountedPrice() {
+        return discountedPrice;
+    }
+
+    public void setDiscountedPrice(double discountedPrice) {
+        this.discountedPrice = discountedPrice;
+    }
+
 
     public Long getProductId() {
         return productId;
@@ -33,11 +44,11 @@ public class AddItemRequest {
         this.quantity = quantity;
     }
 
-    public Integer getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

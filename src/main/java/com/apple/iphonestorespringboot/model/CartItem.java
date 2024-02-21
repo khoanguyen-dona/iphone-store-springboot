@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -24,15 +25,15 @@ public class CartItem {
 
     private String size;
     private int quantity;
-    private Integer price;
-    private Integer discountedPrice;
+    private double price;
+    private double discountedPrice;
     private Long userId;
 
     public CartItem() {
     }
 
-    public CartItem(Long id, Cart cart, Product product, String size, int quantity, Integer price,
-            Integer discountedPrice, Long userId) {
+    public CartItem(Long id, Cart cart, Product product, String size, int quantity, double price,
+            double discountedPrice, Long userId) {
         this.id = id;
         this.cart = cart;
         this.product = product;
@@ -73,16 +74,16 @@ public class CartItem {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    public Integer getPrice() {
+    public double getPrice() {
         return price;
     }
-    public void setPrice(Integer price) {
+    public void setPrice(double price) {
         this.price = price;
     }
-    public Integer getDiscountedPrice() {
+    public double getDiscountedPrice() {
         return discountedPrice;
     }
-    public void setDiscountedPrice(Integer discountedPrice) {
+    public void setDiscountedPrice(double discountedPrice) {
         this.discountedPrice = discountedPrice;
     }
     public Long getUserId() {
