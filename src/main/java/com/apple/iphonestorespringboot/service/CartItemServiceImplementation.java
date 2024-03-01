@@ -45,17 +45,28 @@ public class CartItemServiceImplementation implements CartItemService {
         return createdCartItem;
     }
 
+    // @Override
+    // public CartItem updateCartItem(Long userId, long id, CartItem cartItem) throws CartItemException, UserException {
+
+    //     CartItem item=findCartItemById(id);
+    //     User user=userService.findUserById(item.getUserId());
+
+    //     if(user.getId().equals(userId)){
+    //         item.setQuantity(cartItem.getQuantity());
+    //         item.setPrice(item.getQuantity()*item.getProduct().getPrice());
+    //         item.setDiscountedPrice(item.getProduct().getDiscountedPrice()*item.getQuantity());
+    //     }
+    //     return cartItemRepository.save(item);
+    // }
+
     @Override
-    public CartItem updateCartItem(Long userId, long id, CartItem cartItem) throws CartItemException, UserException {
+    public CartItem updateCartItem(Long cartItemId, CartItem cartItem) throws CartItemException, UserException {
 
-        CartItem item=findCartItemById(id);
-        User user=userService.findUserById(item.getUserId());
-
-        if(user.getId().equals(userId)){
-            item.setQuantity(cartItem.getQuantity());
-            item.setPrice(item.getQuantity()*item.getProduct().getPrice());
-            item.setDiscountedPrice(item.getProduct().getDiscountedPrice()*item.getQuantity());
-        }
+        CartItem item=findCartItemById(cartItemId);
+        item.setQuantity(cartItem.getQuantity());
+        item.setPrice(item.getQuantity()*item.getProduct().getPrice());
+        item.setDiscountedPrice(item.getProduct().getDiscountedPrice()*item.getQuantity());
+    
         return cartItemRepository.save(item);
     }
 

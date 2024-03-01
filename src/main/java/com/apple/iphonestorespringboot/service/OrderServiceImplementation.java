@@ -31,12 +31,12 @@ public class OrderServiceImplementation implements OrderService{
     private UserRepository userRepository;
     private OrderItemService orderItemService;
     private OrderItemRepository orderItemRepository;
-
+    private CartRepository cartRepository;
    
 
     public OrderServiceImplementation(OrderRepository orderRepository, CartService cartService,
             AddressRepository addressRepository, UserRepository userRepository, OrderItemService orderItemService,
-            OrderItemRepository orderItemRepository) {
+            OrderItemRepository orderItemRepository,CartRepository cartRepository ) {
 
         this.orderRepository = orderRepository;
         this.cartService = cartService;
@@ -44,6 +44,7 @@ public class OrderServiceImplementation implements OrderService{
         this.userRepository = userRepository;
         this.orderItemService = orderItemService;
         this.orderItemRepository = orderItemRepository;
+        this.cartRepository=cartRepository;
     }
 
     @Override
@@ -90,6 +91,16 @@ public class OrderServiceImplementation implements OrderService{
             item.setOrder(savedOrder);
             orderItemRepository.save(item);
         }
+        // after createorder we refresh cart of user
+        cart.setTotalPrice(0);
+        cart.setTotalItem(0);
+        cart.setTotalDiscountedPrice(0);
+        cart.setCartItems(null);
+        cart.setDiscount(0);
+        cartRepository.save(cart);
+
+
+
         return savedOrder;
     }
 

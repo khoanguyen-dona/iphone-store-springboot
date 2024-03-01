@@ -5,13 +5,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.apple.iphonestorespringboot.exception.CartItemException;
 import com.apple.iphonestorespringboot.exception.UserException;
+import com.apple.iphonestorespringboot.model.CartItem;
 import com.apple.iphonestorespringboot.model.User;
 import com.apple.iphonestorespringboot.response.ApiResponse;
 import com.apple.iphonestorespringboot.service.CartItemService;
@@ -43,6 +45,13 @@ public ResponseEntity<ApiResponse>deleteCartItem(@PathVariable Long cartItemId
         res.setStatus(true);
 
         return new ResponseEntity<>(res,HttpStatus.OK);
+    }
+
+@PutMapping("/{cartItemId}")
+public ResponseEntity<CartItem>updateCartItem(@RequestBody CartItem req , @PathVariable Long cartItemId
+    , @RequestHeader("Authorization") String jwt ) throws UserException,CartItemException{
+        CartItem cartItem=cartItemService.updateCartItem(cartItemId,req);
+        return new ResponseEntity<CartItem>(cartItem,HttpStatus.CREATED);
     }
 
 

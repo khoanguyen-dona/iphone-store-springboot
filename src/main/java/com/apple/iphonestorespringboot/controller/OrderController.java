@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.apple.iphonestorespringboot.exception.OrderException;
 import com.apple.iphonestorespringboot.exception.UserException;
 import com.apple.iphonestorespringboot.model.Address;
+import com.apple.iphonestorespringboot.model.Cart;
 import com.apple.iphonestorespringboot.model.Order;
 import com.apple.iphonestorespringboot.model.User;
 import com.apple.iphonestorespringboot.service.OrderService;
@@ -37,6 +38,7 @@ public class OrderController {
 
             User user = userService.findUserProfileByJwt(jwt);
             Order order=orderService.createOrder(user,shippingAddress);
+            
             System.out.println("order"+order);
             return new ResponseEntity<Order>(order,HttpStatus.CREATED);
         }

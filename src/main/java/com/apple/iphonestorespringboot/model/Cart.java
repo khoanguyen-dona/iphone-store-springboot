@@ -40,7 +40,7 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(Long id, User user, Set<CartItem> cartItems, int totalPrice, int totalItem, int totalDiscountedPrice,
+    public Cart(Long id, User user, Set<CartItem> cartItems, double totalPrice, int totalItem, double totalDiscountedPrice,
             int discount) {
         this.id = id;
         this.user = user;
